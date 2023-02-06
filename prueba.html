@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div>
+    <p>1.	Escriba un algoritmo que lea un número entero y determine si es par o impar. Si es par, que escriba todos los pares de manera descendiente desde sí mismo y hasta el cero. Si es impar, que escriba todos los impares de manera descendiente desde si sí mismo hasta el uno. Utilice la instrucción LEER NUMERO al inicio del programa para cargar un número en la variable NUMERO.</p>
+    <h1> Numero par o impar</h1>
+   
+        <input type="number" id="numero">
+        <button onclick="calcular()">calcular</button>
+   
+        <br>
+    <p>Resultado</p>
+    <h1 id="result"></h1>
+    <lu id="lista">
+        
+    </lu>
+</div>
+
+<div>
+     <p>
+        2.	Escriba un algoritmo que visualice una clasificación de 50 personas según edad y sexo. Deberá mostrar los siguientes resultados:
+            a.	Cantidad de personas mayores de edad (18 años o más).
+            b.	Cantidad de personas menores de edad.
+            c.	Cantidad de personas masculinas mayores de edad.
+            d.	Cantidad de personas femeninas menores de edad.
+            e.	Porcentaje que representan las personas mayores de edad respecto al total de personas.
+            f.	Porcentaje que representan las mujeres respecto al total de personas.
+
+            Utilice la instrucción LEER PERSONAS al inicio del programa para cargar los datos de las 50 personas en un variable, PERSONAS, que actúa como un vector de 50 posiciones.
+            Cada elemento de PERSONAS es de un tipo estructurado que dispone dos campos:
+            SEXO y EDAD.
+
+    </p>
+    <button onclick="personas()"> calcular</button>
+    <br>
+    <label id="mayores"></label>
+    <br>
+    <label id="menores"></label>
+    <br>
+    <label id="mm"></label>
+    <br>
+    <label id="fm"></label>
+    <br>
+    <label id="pm"></label>
+    <br>
+    <label id="pf"></label>
+
+</div>
+
+<div>
+     <p>
+
+        3.	Desarrolle un algoritmo para el cálculo del salario de un trabajador. 
+        El importe liquidado (sueldo) depende de una tarifa o precio por hora establecida 
+        y de un condicionante sobre las horas trabajadas: si la cantidad de horas trabajadas es 
+        mayor a 40 horas, la tarifa se incrementa en un 50% para las horas extras. Calcular el sueldo 
+        recibido por el trabajador en base las horas trabajadas y la tarifa. Utilice las instrucciones
+         LEER HORASTRABAJADAS y LEER TARIFA al inicio del programa para cargar los valores en las variables 
+         HORASTRABAJADAS y TARIFA.
+    </p>
+    <p>Tarifa</p>
+    <input id="sueldo" type="number">
+    <p>horas de trabajo</p>
+    <input id="horas" type="number">
+
+    <button onclick="sueldo()">calcular</button>
+    <br>
+    <label id="sueldoResultado"></label>
+</div>
+
+
+   
+   
+</body>
+
+<script>
+    function calcular(){
+        let numero= document.getElementById("numero").value;
+        let resultado= document.getElementById("result")
+        let lista= document.getElementById("lista")
+        lista.innerHTML = '';
+       if(numero % 2==0){
+        while(numero>0){
+            resultado.innerHTML="par"
+             var li = document.createElement("li");
+             li.appendChild(document.createTextNode(numero));
+             lista.appendChild(li);
+             numero=numero-2
+        }
+
+       }else{
+       while(numero>0){
+        resultado.innerHTML="Impar"
+             var li = document.createElement("li");
+             li.appendChild(document.createTextNode(numero));
+             lista.appendChild(li);
+             numero=numero-2
+        }
+        }
+       //alert(numero);
+    }
+
+    function sueldo(){
+        let result= 0
+        let tarifa= document.getElementById("sueldo")
+        let horas = document.getElementById("horas")
+        console.log(typeof tarifa)
+        if(horas.value>40){
+            let horasExtras = horas.value-40
+            result=( (horasExtras*tarifa.value)/2)+(40* tarifa.value)
+        }
+        else{ 
+            result=  tarifa.value * horas.value
+        }
+        let resultado = document.getElementById("sueldoResultado")
+        resultado.innerHTML="el sueldo a pagar es: "+result
+    }
+    function personas(){
+
+
+        let person = [[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],
+        [18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],
+        [18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],
+        [18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],
+        [18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"],[18,"f"],[17,"f"],[18,"f"],[18,"m"] ,[18,"m"]];
+
+        let rmayores=0
+        let rmenores=0
+        let femenino=0
+        let rmm=0
+        let rmf=0
+        let rpm=0
+        let rpf=0
+        person.forEach(element => {
+
+            if(element[0]>=18){
+                rmayores++
+                if(element[1]=="m"){
+                    rmm++
+                }
+            }
+            else{
+                rmenores++
+                if(element[1]=="f"){
+                    rmf++
+                }
+            }
+            if(element[1]=="f"){
+                femenino++
+                }
+            
+
+           
+
+
+
+            
+        });
+
+        rpm=(100*rmayores)/person.length
+        rpf=(100*femenino)/person.length
+
+
+
+
+
+        let mayores = document.getElementById("mayores")
+        mayores.innerHTML="existen "+rmayores+" mayores de edad"
+
+        let menores = document.getElementById("menores")
+        menores.innerHTML="existen "+rmenores+" personas menores de edad"
+
+        let mm = document.getElementById("mm")
+        mm.innerHTML="existen "+rmm+" personas mayores de edad masculinos"
+
+
+        let fm = document.getElementById("fm")
+        fm.innerHTML="existen "+rmf+" personas menores de edad femeninas"
+
+
+       let pf = document.getElementById("pf")
+        pf.innerHTML="el porsentaje de mayores de edad es "+rpm+" %"
+
+        let pm = document.getElementById("pm")
+        pm.innerHTML="el porsentaje  de mujeres es "+rpf+" %"
+
+
+
+    }
+</script>
+</html>
